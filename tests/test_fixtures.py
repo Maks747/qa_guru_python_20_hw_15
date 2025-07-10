@@ -2,7 +2,7 @@
 Сделайте разные фикстуры для каждого теста, которые выставят размеры окна браузера
 """
 
-from selene import browser,have,by,be
+from selene import browser,have,by
 
 
 def test_github_desktop(desktop_browser):
@@ -15,4 +15,4 @@ def test_github_mobile(mobile_browser):
     browser.open('https://github.com/')
     browser.element('[class=Button-content]').click()
     browser.element(by.text("Sign up")).click()
-    browser.element('#login').should(be.visible)
+    browser.element("h2").should(have.text("Sign up to GitHub"))

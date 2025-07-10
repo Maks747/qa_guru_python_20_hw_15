@@ -2,7 +2,7 @@
 Переопределите параметр с помощью indirect параметризации на уровне теста
 """
 import pytest
-from selene import browser,have,by,be
+from selene import browser,have,by
 
 @pytest.mark.parametrize("driver", ["desktop"], indirect=True)
 def test_github_desktop(driver):
@@ -16,4 +16,4 @@ def test_github_mobile(driver):
     browser.open('https://github.com/')
     browser.element('[class=Button-content]').click()
     browser.element(by.text("Sign up")).click()
-    browser.element('#login').should(be.visible)
+    browser.element("h2").should(have.text("Sign up to GitHub"))
