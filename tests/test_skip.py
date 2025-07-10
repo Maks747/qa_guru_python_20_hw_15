@@ -3,7 +3,7 @@
 Пропустите мобильный тест, если соотношение сторон десктопное (и наоборот)
 """
 import pytest
-from selene import browser,have
+from selene import browser,have,by,be
 
 
 def test_github_desktop(driver_config):
@@ -17,6 +17,5 @@ def test_github_mobile(driver_config):
     if browser.config.window_height > 1000:
         pytest.skip("Разрешение экрана для Desktop")
     browser.open('https://github.com/')
-    browser.element('[class=Button-content]').click()
-    browser.element('[href="/login"]').click()
-    browser.element("h1").should(have.text("Sign in to GitHub"))
+    browser.element(by.text("Sign up")).click()
+    browser.element('#login').should(be.visible)
