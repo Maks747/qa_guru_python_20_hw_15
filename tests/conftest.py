@@ -1,5 +1,5 @@
 import pytest
-from selene import browser,have
+from selene import browser
 
 @pytest.fixture
 def desktop_browser():

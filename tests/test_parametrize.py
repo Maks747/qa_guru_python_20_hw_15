@@ -2,16 +2,18 @@
 Переопределите параметр с помощью indirect параметризации на уровне теста
 """
 import pytest
+from selene import browser,have
+
+@pytest.mark.parametrize("driver", ["desktop"], indirect=True)
+def test_github_desktop(driver):
+    browser.open('https://github.com/')
+    browser.element(".HeaderMenu-link--sign-in").click()
+    browser.element("h1").should(have.text("Sign in to GitHub"))
 
 
-@pytest.fixture()
-def browser():
-    pass
-
-
-def test_github_desktop(browser):
-    pass
-
-
-def test_github_mobile(browser):
-    pass
+@pytest.mark.parametrize("driver", ["mobile"], indirect=True)
+def test_github_mobile(driver):
+    browser.open('https://github.com/')
+    browser.element('[class=Button-content]').click()
+    browser.element('[href="/login"]').click()
+    browser.element("h1").should(have.text("Sign in to GitHub"))
